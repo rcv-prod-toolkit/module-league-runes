@@ -1,0 +1,31 @@
+name: Release
+
+# Run on every commit tag which begins with "v" (e.g., "v0.1.4")
+on:
+  push:
+    tags:
+      - "v*"
+
+# Automatically create a GitHub Release, with release details specified (the relevant commits)
+jobs:
+  release:
+    name: "Release"
+    runs-on: "ubuntu-latest"
+    steps:
+
+      - uses: actions/checkout@v2
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16'
+
+      - name: Create Zip
+        run: zip -r module-league-runes.zip package.json package-lock.json frontend/*
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: |
+            module-league-runes.zip
