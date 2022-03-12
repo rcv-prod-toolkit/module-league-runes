@@ -26,7 +26,7 @@ const updateUi = data => {
       5: [5, 10]
     }
 
-    const getDDragonPath = clientPath => `/serve/static-league/img/${clientPath}`
+    const getDDragonPath = clientPath => `/serve/module-league-static/img/${clientPath}`
 
     const getDDragonPathsFromRunes = runes => ({
       primary: getDDragonPath(runes[0].icon),
@@ -43,8 +43,8 @@ const updateUi = data => {
     const championRight = data.participants[championMapping[num][1] - 1].champion
     const runesLeft = data.participants[championMapping[num][0] - 1].perks.perkConstants
     const runesRight = data.participants[championMapping[num][1] - 1].perks.perkConstants
-    const splashLinkLeft = `/serve/static-league/img/champion/centered/${championLeft.key}.jpg`
-    const splashLinkRight = `/serve/static-league/img/champion/centered/${championRight.key}.jpg`
+    const splashLinkLeft = `/serve/module-league-static/img/champion/centered/${championLeft.key}.jpg`
+    const splashLinkRight = `/serve/module-league-static/img/champion/centered/${championRight.key}.jpg`
     // const splashLinkLeft = `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${championLeft.id}_0.jpg`
     // const splashLinkRight = `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${championRight.id}_0.jpg`
 

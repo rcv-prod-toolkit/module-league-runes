@@ -46,7 +46,7 @@ module.exports = (ctx) => {
     });
   });
 
-  ctx.LPTE.on('state-league', 'live-game-loaded', e => {
+  ctx.LPTE.on('module-league-state', 'live-game-loaded', e => {
     gfxState.participants = e.state.web.live.participants;
     // console.log(e)
     gfxState.dataState = 'READY'
