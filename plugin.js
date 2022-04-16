@@ -1,5 +1,3 @@
-const namespace = 'rcv-rune-gfx';
-
 const initialState = {
   state: 'HIDDEN',
   dataState: 'NO_GAME',
@@ -7,6 +5,8 @@ const initialState = {
 }
 
 module.exports = (ctx) => {
+  const namespace = ctx.plugin.module.getName()
+
   const gfxState = initialState;
 
   const emitUpdate = () => {
@@ -28,9 +28,9 @@ module.exports = (ctx) => {
       version: 1
     },
     pages: [{
-      name: 'OP: rcv-rune-gfx',
+      name: 'LoL: Runes',
       frontend: 'frontend',
-      id: 'op-rcv-rune-gfx'
+      id: `op-${namespace}`
     }]
   });
 
