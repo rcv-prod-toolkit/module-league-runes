@@ -1,4 +1,5 @@
 let previousState = 'HIDDEN'
+const namespace = 'module-league-runes'
 
 const updateUi = data => {
   console.log(data);
@@ -77,7 +78,7 @@ const updateUi = data => {
 const tick = async () => {
   const data = await this.LPTE.request({
     meta: {
-      namespace: 'rcv-rune-gfx',
+      namespace,
       type: 'request',
       version: 1
     }
@@ -90,7 +91,7 @@ window.LPTE.onready(() => {
   setTimeout(tick, 100)
   // setInterval(tick, 1000)
 
-  window.LPTE.on('rcv-rune-gfx', 'update', data => {
+  window.LPTE.on(namespace, 'update', data => {
     const timeout = previousState === 'HIDDEN' ? 1 : 1000
     updateUi(data.state)
     setTimeout(() => updateUi(data.state), timeout)
