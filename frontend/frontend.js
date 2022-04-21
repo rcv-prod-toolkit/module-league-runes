@@ -1,5 +1,5 @@
 const updateUi = (state) => {
-  $('#embed-copy').val(`${location.href}/gfx.html${window.apiKey !== null ? '?apikey' + window.apiKey : ''}`);
+  $('#embed-copy').val(`${location.href}/gfx.html${window.apiKey !== null ? '?apikey=' + window.apiKey : ''}`);
   $('#state').text(JSON.stringify(state, null, 2))
 
   $('#text-state').text(state.state);
