@@ -2,14 +2,10 @@ let previousState = 'HIDDEN'
 const namespace = 'module-league-runes'
 
 const updateUi = data => {
-  console.log(data);
-
   if (data.state === 'HIDDEN') {
     $('.blue-box').addClass('hidden');
     $('.red-box').addClass('hidden');
-    console.log('state is hidden')
   } else {
-    console.log(previousState, data.state)
     if (previousState !== data.state) {
       $('.red-box').addClass('hidden');
       $('.blue-box').addClass('hidden');
@@ -37,8 +33,6 @@ const updateUi = data => {
       secondary1: getDDragonPath(runes[4].icon),
       secondary2: getDDragonPath(runes[5].icon)
     })
-
-    console.log(data.participants[championMapping[num][0] - 1].perks.perkConstants)
 
     const championLeft = data.participants[championMapping[num][0] - 1].champion
     const championRight = data.participants[championMapping[num][1] - 1].champion

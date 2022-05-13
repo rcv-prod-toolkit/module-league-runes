@@ -48,7 +48,6 @@ module.exports = (ctx) => {
 
   ctx.LPTE.on('module-league-state', 'live-game-loaded', e => {
     gfxState.participants = e.state.web.live.participants;
-    // console.log(e)
     gfxState.dataState = 'READY'
     emitUpdate()
   }); 
