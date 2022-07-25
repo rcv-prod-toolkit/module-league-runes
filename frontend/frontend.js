@@ -1,9 +1,13 @@
 const updateUi = (state) => {
-  $('#embed-copy').val(`${location.href}/gfx.html${window.apiKey !== null ? '?apikey=' + window.apiKey : ''}`);
+  $('#embed-copy').val(
+    `${location.href}/gfx.html${
+      window.apiKey !== null ? '?apikey=' + window.apiKey : ''
+    }`
+  )
   $('#state').text(JSON.stringify(state, null, 2))
 
-  $('#text-state').text(state.state);
-  $('#data-state').text(state.dataState);
+  $('#text-state').text(state.state)
+  $('#data-state').text(state.dataState)
 }
 
 const namespace = 'module-league-runes'
@@ -15,9 +19,9 @@ const updateState = async () => {
       type: 'request',
       version: 1
     }
-  });
+  })
 
-  updateUi(response.state);
+  updateUi(response.state)
 }
 
 const nextStep = () => {
@@ -41,6 +45,6 @@ const prevStep = () => {
 }
 
 LPTE.onready(async () => {
-  updateState();
+  updateState()
   LPTE.on(namespace, 'update', (e) => updateUi(e.state))
 })

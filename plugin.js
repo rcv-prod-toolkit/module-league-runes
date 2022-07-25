@@ -7,7 +7,7 @@ const initialState = {
 module.exports = (ctx) => {
   const namespace = ctx.plugin.module.getName()
 
-  const gfxState = initialState;
+  const gfxState = initialState
 
   const emitUpdate = () => {
     ctx.LPTE.emit({
@@ -17,7 +17,7 @@ module.exports = (ctx) => {
         version: 1
       },
       state: gfxState
-    });
+    })
   }
 
   // Register new UI page
@@ -27,15 +27,17 @@ module.exports = (ctx) => {
       namespace: 'ui',
       version: 1
     },
-    pages: [{
-      name: 'LoL: Runes',
-      frontend: 'frontend',
-      id: `op-${namespace}`
-    }]
-  });
+    pages: [
+      {
+        name: 'LoL: Runes',
+        frontend: 'frontend',
+        id: `op-${namespace}`
+      }
+    ]
+  })
 
   // Answer requests to get state
-  ctx.LPTE.on(namespace, 'request', e => {
+  ctx.LPTE.on(namespace, 'request', (e) => {
     ctx.LPTE.emit({
       meta: {
         type: e.meta.reply,
@@ -43,57 +45,57 @@ module.exports = (ctx) => {
         version: 1
       },
       state: gfxState
-    });
-  });
+    })
+  })
 
-  ctx.LPTE.on('module-league-state', 'live-game-loaded', e => {
-    gfxState.participants = e.state.web.live.participants;
+  ctx.LPTE.on('module-league-state', 'live-game-loaded', (e) => {
+    gfxState.participants = e.state.web.live.participants
     gfxState.dataState = 'READY'
     emitUpdate()
-  }); 
+  })
 
   // Move a step forward in animation
-  ctx.LPTE.on(namespace, 'next-step', async e => {
+  ctx.LPTE.on(namespace, 'next-step', async (e) => {
     if (gfxState.dataState !== 'READY') {
-      return;
+      return
     }
 
     if (gfxState.state === 'HIDDEN') {
       // Show
-      gfxState.state = '1';
+      gfxState.state = '1'
     } else if (gfxState.state === '5') {
       // End
-      gfxState.state = 'HIDDEN';
+      gfxState.state = 'HIDDEN'
     } else {
-      let number = parseInt(gfxState.state);
-      number++;
-      gfxState.state = number.toString();
+      let number = parseInt(gfxState.state)
+      number++
+      gfxState.state = number.toString()
     }
     emitUpdate()
-  });
+  })
 
   // Move a step backward in animation
-  ctx.LPTE.on(namespace, 'previous-step', async e => {
+  ctx.LPTE.on(namespace, 'previous-step', async (e) => {
     if (gfxState.dataState !== 'READY') {
-      return;
+      return
     }
 
     if (gfxState.state === 'HIDDEN') {
       // Show
-      gfxState.state = '5';
+      gfxState.state = '5'
     } else if (gfxState.state === '1') {
       // End
-      gfxState.state = 'HIDDEN';
+      gfxState.state = 'HIDDEN'
     } else {
-      let number = parseInt(gfxState.state);
-      number--;
-      gfxState.state = number.toString();
+      let number = parseInt(gfxState.state)
+      number--
+      gfxState.state = number.toString()
     }
     emitUpdate()
-  });
+  })
 
-  ctx.LPTE.on(namespace, 'reset', e => {
-    gameState.state = 'UNSET';
+  ctx.LPTE.on(namespace, 'reset', (e) => {
+    gameState.state = 'UNSET'
 
     ctx.LPTE.emit({
       meta: {
@@ -101,9 +103,9 @@ module.exports = (ctx) => {
         type: e.meta.reply,
         version: 1
       }
-    });
+    })
     emitUpdate()
-  });
+  })
 
   // Emit event that we're ready to operate
   ctx.LPTE.emit({
@@ -113,5 +115,5 @@ module.exports = (ctx) => {
       version: 1
     },
     status: 'RUNNING'
-  });
-};
+  })
+}

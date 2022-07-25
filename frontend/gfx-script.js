@@ -1,19 +1,19 @@
 let previousState = 'HIDDEN'
 const namespace = 'module-league-runes'
 
-const updateUi = data => {
+const updateUi = (data) => {
   if (data.state === 'HIDDEN') {
-    $('.blue-box').addClass('hidden');
-    $('.red-box').addClass('hidden');
+    $('.blue-box').addClass('hidden')
+    $('.red-box').addClass('hidden')
   } else {
     if (previousState !== data.state) {
-      $('.red-box').addClass('hidden');
-      $('.blue-box').addClass('hidden');
-      previousState = data.state;
-      return;
+      $('.red-box').addClass('hidden')
+      $('.blue-box').addClass('hidden')
+      previousState = data.state
+      return
     }
 
-    const num = parseInt(data.state);
+    const num = parseInt(data.state)
 
     const championMapping = {
       1: [1, 6],
@@ -23,9 +23,10 @@ const updateUi = data => {
       5: [5, 10]
     }
 
-    const getDDragonPath = clientPath => `/serve/module-league-static/img/${clientPath}`
+    const getDDragonPath = (clientPath) =>
+      `/serve/module-league-static/img/${clientPath}`
 
-    const getDDragonPathsFromRunes = runes => ({
+    const getDDragonPathsFromRunes = (runes) => ({
       primary: getDDragonPath(runes[0].icon),
       primary1: getDDragonPath(runes[1].icon),
       primary2: getDDragonPath(runes[2].icon),
@@ -35,9 +36,12 @@ const updateUi = data => {
     })
 
     const championLeft = data.participants[championMapping[num][0] - 1].champion
-    const championRight = data.participants[championMapping[num][1] - 1].champion
-    const runesLeft = data.participants[championMapping[num][0] - 1].perks.perkConstants
-    const runesRight = data.participants[championMapping[num][1] - 1].perks.perkConstants
+    const championRight =
+      data.participants[championMapping[num][1] - 1].champion
+    const runesLeft =
+      data.participants[championMapping[num][0] - 1].perks.perkConstants
+    const runesRight =
+      data.participants[championMapping[num][1] - 1].perks.perkConstants
     const splashLinkLeft = `/serve/module-league-static/img/champion/centered/${championLeft.key}.jpg`
     const splashLinkRight = `/serve/module-league-static/img/champion/centered/${championRight.key}.jpg`
     // const splashLinkLeft = `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${championLeft.id}_0.jpg`
@@ -48,25 +52,25 @@ const updateUi = data => {
     const runesRightFull = getDDragonPathsFromRunes(runesRight)
 
     const applyImages = (prefix, runes) => {
-      $(`#${prefix}-rune-primary`).attr('src', runes.primary);
-      $(`#${prefix}-rune-primary-1`).attr('src', runes.primary1);
-      $(`#${prefix}-rune-primary-2`).attr('src', runes.primary2);
-      $(`#${prefix}-rune-primary-3`).attr('src', runes.primary3);
-      $(`#${prefix}-rune-secondary-1`).attr('src', runes.secondary1);
-      $(`#${prefix}-rune-secondary-2`).attr('src', runes.secondary2);
+      $(`#${prefix}-rune-primary`).attr('src', runes.primary)
+      $(`#${prefix}-rune-primary-1`).attr('src', runes.primary1)
+      $(`#${prefix}-rune-primary-2`).attr('src', runes.primary2)
+      $(`#${prefix}-rune-primary-3`).attr('src', runes.primary3)
+      $(`#${prefix}-rune-secondary-1`).attr('src', runes.secondary1)
+      $(`#${prefix}-rune-secondary-2`).attr('src', runes.secondary2)
     }
 
-    $('.red-box').removeClass('hidden');
-    $('.blue-box').removeClass('hidden');
+    $('.red-box').removeClass('hidden')
+    $('.blue-box').removeClass('hidden')
 
-    $('.blue-box').css('background-image', `url(${splashLinkLeft})`);
-    $('.red-box').css('background-image', `url(${splashLinkRight})`);
+    $('.blue-box').css('background-image', `url(${splashLinkLeft})`)
+    $('.red-box').css('background-image', `url(${splashLinkRight})`)
 
-    applyImages('blue', runesLeftFull);
-    applyImages('red', runesRightFull);
+    applyImages('blue', runesLeftFull)
+    applyImages('red', runesRightFull)
   }
 
-  previousState = data.state;
+  previousState = data.state
 }
 
 const tick = async () => {
@@ -76,8 +80,8 @@ const tick = async () => {
       type: 'request',
       version: 1
     }
-  });
-  updateUi(data.state);
+  })
+  updateUi(data.state)
 }
 
 window.LPTE.onready(() => {
@@ -85,7 +89,7 @@ window.LPTE.onready(() => {
   setTimeout(tick, 100)
   // setInterval(tick, 1000)
 
-  window.LPTE.on(namespace, 'update', data => {
+  window.LPTE.on(namespace, 'update', (data) => {
     const timeout = previousState === 'HIDDEN' ? 1 : 1000
     updateUi(data.state)
     setTimeout(() => updateUi(data.state), timeout)
