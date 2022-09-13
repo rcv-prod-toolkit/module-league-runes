@@ -10,6 +10,9 @@
     ],
     "plugin": {
       "main": "plugin.js"
-    }
+    },
+    "dependencies": [
+      "module-league-state"
+    ]
   }
 }
