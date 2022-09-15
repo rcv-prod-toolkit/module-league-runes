@@ -3,12 +3,12 @@ const namespace = 'module-league-runes'
 
 const updateUi = (data) => {
   if (data.state === 'HIDDEN') {
-    $('.blue-box').addClass('hidden')
-    $('.red-box').addClass('hidden')
+    document.querySelector('.blue-box').classList.add('hidden')
+    document.querySelector('.red-box').classList.add('hidden')
   } else {
     if (previousState !== data.state) {
-      $('.red-box').addClass('hidden')
-      $('.blue-box').addClass('hidden')
+      document.querySelector('.red-box').classList.add('hidden')
+      document.querySelector('.blue-box').classList.add('hidden')
       previousState = data.state
       return
     }
@@ -44,27 +44,25 @@ const updateUi = (data) => {
       data.participants[championMapping[num][1] - 1].perks.perkConstants
     const splashLinkLeft = `/serve/module-league-static/img/champion/centered/${championLeft.key}.jpg`
     const splashLinkRight = `/serve/module-league-static/img/champion/centered/${championRight.key}.jpg`
-    // const splashLinkLeft = `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${championLeft.id}_0.jpg`
-    // const splashLinkRight = `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${championRight.id}_0.jpg`
 
-    // https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/RunesIcon.png
     const runesLeftFull = getDDragonPathsFromRunes(runesLeft)
     const runesRightFull = getDDragonPathsFromRunes(runesRight)
 
     const applyImages = (prefix, runes) => {
-      $(`#${prefix}-rune-primary`).attr('src', runes.primary)
-      $(`#${prefix}-rune-primary-1`).attr('src', runes.primary1)
-      $(`#${prefix}-rune-primary-2`).attr('src', runes.primary2)
-      $(`#${prefix}-rune-primary-3`).attr('src', runes.primary3)
-      $(`#${prefix}-rune-secondary-1`).attr('src', runes.secondary1)
-      $(`#${prefix}-rune-secondary-2`).attr('src', runes.secondary2)
+      document.querySelector(`#${prefix}-rune-primary`).src = runes.primary
+      document.querySelector(`#${prefix}-rune-primary-1`).src = runes.primary1
+      document.querySelector(`#${prefix}-rune-primary-2`).src = runes.primary2
+      document.querySelector(`#${prefix}-rune-primary-3`).src = runes.primary3
+      document.querySelector(`#${prefix}-rune-secondary-1`).src = runes.secondary1
+      document.querySelector(`#${prefix}-rune-secondary-2`).src = runes.secondary2
     }
 
-    $('.red-box').removeClass('hidden')
-    $('.blue-box').removeClass('hidden')
+    document.querySelector('.red-box').classList.remove('hidden')
+    document.querySelector('.blue-box').classList.remove('hidden')
 
-    $('.blue-box').css('background-image', `url(${splashLinkLeft})`)
-    $('.red-box').css('background-image', `url(${splashLinkRight})`)
+    document.querySelector('.blue-box').style.backgroundImage = `url(${splashLinkLeft})`
+    
+    document.querySelector('.red-box').style.backgroundImage = `url(${splashLinkRight})`
 
     applyImages('blue', runesLeftFull)
     applyImages('red', runesRightFull)

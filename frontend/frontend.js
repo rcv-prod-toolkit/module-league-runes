@@ -1,22 +1,23 @@
-const updateUi = (state) => {
-  $('#embed-copy').val(
-    `${location.href}/gfx.html${
-      window.apiKey !== null ? '?apikey=' + window.apiKey : ''
-    }`
-  )
-  $('#state').text(JSON.stringify(state, null, 2))
+const updateUi = async (state) => {
+  const port = await window.constants.getWebServerPort()
+  const location = `http://localhost:${port}/pages/op-module-league-runes`
 
-  $('#text-state').text(state.state)
-  $('#data-state').text(state.dataState)
+  const apiKey = await window.constants.getApiKey()
+
+  document.querySelector("#embed-copy").value = `${location}/gfx.html${apiKey !== null ? "?apikey=" + apiKey : ""}`
+  document.querySelector("#runes-gfx").src = `${location}/gfx.html${apiKey !== null ? "?apikey=" + apiKey : ""}`
+
+  document.querySelector("#state").innerHTML = JSON.stringify(state, null, 2)
+
+  document.querySelector("#text-state").innerHTML = state.state
+  document.querySelector("#data-state").innerHTML = state.dataState
 }
-
-const namespace = 'module-league-runes'
 
 const updateState = async () => {
   const response = await LPTE.request({
     meta: {
-      namespace,
-      type: 'request',
+      namespace: "module-league-runes",
+      type: "request",
       version: 1
     }
   })
@@ -27,8 +28,8 @@ const updateState = async () => {
 const nextStep = () => {
   LPTE.emit({
     meta: {
-      namespace,
-      type: 'next-step',
+      namespace: "module-league-runes",
+      type: "next-step",
       version: 1
     }
   })
@@ -37,8 +38,8 @@ const nextStep = () => {
 const prevStep = () => {
   LPTE.emit({
     meta: {
-      namespace,
-      type: 'previous-step',
+      namespace: "module-league-runes",
+      type: "previous-step",
       version: 1
     }
   })
@@ -46,5 +47,5 @@ const prevStep = () => {
 
 LPTE.onready(async () => {
   updateState()
-  LPTE.on(namespace, 'update', (e) => updateUi(e.state))
+  LPTE.on("module-league-runes", "update", (e) => updateUi(e.state))
 })
