@@ -13,7 +13,8 @@
     },
     "toolkitVersion": ">=1.2.9",
     "dependencies": [
-      "module-league-state"
+      "module-league-state",
+      "module-league-static"
     ]
   }
 }
