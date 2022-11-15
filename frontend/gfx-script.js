@@ -53,16 +53,22 @@ const updateUi = (data) => {
       document.querySelector(`#${prefix}-rune-primary-1`).src = runes.primary1
       document.querySelector(`#${prefix}-rune-primary-2`).src = runes.primary2
       document.querySelector(`#${prefix}-rune-primary-3`).src = runes.primary3
-      document.querySelector(`#${prefix}-rune-secondary-1`).src = runes.secondary1
-      document.querySelector(`#${prefix}-rune-secondary-2`).src = runes.secondary2
+      document.querySelector(`#${prefix}-rune-secondary-1`).src =
+        runes.secondary1
+      document.querySelector(`#${prefix}-rune-secondary-2`).src =
+        runes.secondary2
     }
 
     document.querySelector('.red-box').classList.remove('hidden')
     document.querySelector('.blue-box').classList.remove('hidden')
 
-    document.querySelector('.blue-box').style.backgroundImage = `url(${splashLinkLeft})`
-    
-    document.querySelector('.red-box').style.backgroundImage = `url(${splashLinkRight})`
+    document.querySelector(
+      '.blue-box'
+    ).style.backgroundImage = `url(${splashLinkLeft})`
+
+    document.querySelector(
+      '.red-box'
+    ).style.backgroundImage = `url(${splashLinkRight})`
 
     applyImages('blue', runesLeftFull)
     applyImages('red', runesRightFull)
