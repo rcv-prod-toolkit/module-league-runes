@@ -31,7 +31,10 @@
   <div class="dropdown-menu">
     <button
       class="dropdown-item"
-      onclick="navigator.clipboard.writeText(`http://${server}/api/events/shortcut/ingest/module-league-runes/next-step`)"
+      onclick="window.getActionLink(
+        'module-league-runes',
+        'next-step'
+      )"
     >
       Copy Action-Link
     </button>
@@ -54,7 +57,10 @@
   <div class="dropdown-menu">
     <button
       class="dropdown-item"
-      onclick="navigator.clipboard.writeText(`http://${server}/api/events/shortcut/ingest/module-league-runes/previous-step`)"
+      onclick="window.getActionLink(
+        'module-league-runes',
+        'previous-step'
+      )"
     >
       Copy Action-Link
     </button>
