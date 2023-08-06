@@ -42,8 +42,8 @@ const updateUi = (data) => {
       data.participants[championMapping[num][0] - 1].perks.perkConstants
     const runesRight =
       data.participants[championMapping[num][1] - 1].perks.perkConstants
-    const splashLinkLeft = `/serve/module-league-static/img/champion/centered/${championLeft.key}.jpg`
-    const splashLinkRight = `/serve/module-league-static/img/champion/centered/${championRight.key}.jpg`
+    const splashLinkLeft = `/serve/module-league-static/img/champion/centered/${championLeft.id}_0.jpg`
+    const splashLinkRight = `/serve/module-league-static/img/champion/centered/${championRight.id}_0.jpg`
 
     const runesLeftFull = getDDragonPathsFromRunes(runesLeft)
     const runesRightFull = getDDragonPathsFromRunes(runesRight)
