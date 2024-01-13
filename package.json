@@ -11,7 +11,7 @@
     "plugin": {
       "main": "plugin.js"
     },
-    "toolkitVersion": ">=1.2.9",
+    "toolkitVersion": ">=1.8",
     "dependencies": [
       "module-league-state",
       "module-league-static"
