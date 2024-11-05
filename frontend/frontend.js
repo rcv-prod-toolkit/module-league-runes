@@ -1,7 +1,7 @@
 let server = ''
 const updateUi = async (state) => {
-  server = await window.constants.getWebServerPort()
-  const location = `http://${server}/pages/op-module-league-runes`
+  server = await window.constants.getModuleURL()
+  const location = server
 
   const apiKey = await window.constants.getApiKey()
 
